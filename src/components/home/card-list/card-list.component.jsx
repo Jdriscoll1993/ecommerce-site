@@ -7,7 +7,6 @@ const CardList = ({ categories }) => {
             {categories.map((category) => (
                 <Card key={category.id} category={category} />
             ))}
-
         </div>)
 }
 

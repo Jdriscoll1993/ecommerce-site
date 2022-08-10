@@ -1,39 +1,28 @@
-import CardList from './components/home/card-list/card-list.component';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Home from './routes/home/home.component';
+import Navigation from './routes/navigation/navigation.component'
+
+const Auth = () => {
+  return(
+    <div><h1>sign in page</h1></div>
+  )
+}
 
 const App = () => {
 
-  const categories = [
-    {
-      id: '1',
-      title: 'Hats',
-      imageUrl: "https://via.placeholder.com/2000/924442"
-    },
-    {
-      id: '2',
-      title: 'Hoodies',
-      imageUrl: "https://via.placeholder.com/2000/745795"
-    },
-    {
-      id: '3',
-      title: 'Shirts',
-      imageUrl: "https://via.placeholder.com/2000/993570"
-    },
-    {
-      id: '3',
-      title: 'Accessories',
-      imageUrl: "https://via.placeholder.com/2000/243355"
-    },
-    {
-      id: '3',
-      title: 'Exclusive',
-      imageUrl: "https://via.placeholder.com/2000/266355"
-    }
-  ]
-
-
   return (
-    <CardList categories={categories} />
-  );
+    <>
+      <Routes>
+        <Route path='/' element={<Navigation />}>
+          <Route path='home' element={<Home />} />
+          <Route path='signin' element={<Auth />} />
+
+
+        </Route>
+
+      </Routes>
+    </>)
 }
 
 export default App;
