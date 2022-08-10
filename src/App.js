@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import CardList from './components/home/card-list/card-list.component';
 
-function App() {
+const App = () => {
+
+  const categories = [
+    {
+      id: '1',
+      title: 'Hats',
+      imageUrl: "https://via.placeholder.com/2000/924442"
+    },
+    {
+      id: '2',
+      title: 'Hoodies',
+      imageUrl: "https://via.placeholder.com/2000/745795"
+    },
+    {
+      id: '3',
+      title: 'Shirts',
+      imageUrl: "https://via.placeholder.com/2000/993570"
+    },
+    {
+      id: '3',
+      title: 'Accessories',
+      imageUrl: "https://via.placeholder.com/2000/243355"
+    },
+    {
+      id: '3',
+      title: 'Exclusive',
+      imageUrl: "https://via.placeholder.com/2000/266355"
+    }
+  ]
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CardList categories={categories} />
   );
 }
 
