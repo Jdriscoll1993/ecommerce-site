@@ -35,29 +35,38 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
+export const db = getFirestore();
+
+//add additional auth providers here
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 
 
-export const db = getFirestore();
+//asynchronously create document references for signing in and signing out users
+export const createUserDocumentFromAuth = async (
+    userAuth,
+    additionalInfo = { displayName: 'ferkle' }
+) => {
+    if (!userAuth) return;
 
-//create document references for signing in and signing out users
-export const createUserDocumentFromAuth = async (userAuth) => {
-    if(!userAuth) return;
     console.log(userAuth);
-    const userDocRef = doc(db, 'users', userAuth.uid);
 
+    const userDocRef = doc(db, 'users', userAuth.uid);
     const userSnapshot = await getDoc(userDocRef);
+
     //check if snapshot exists and if not create the user in db
     if (!userSnapshot.exists()) {
+
         const { displayName, email } = userAuth;
         const createdAt = new Date();
+
         try {
             //set the doc with this object
             await setDoc(userDocRef, {
                 displayName,
                 email,
-                createdAt
+                createdAt,
+                ...additionalInfo //spreading in extra info at end 
             });
         }
         catch (error) {
@@ -66,6 +75,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
     }
 
     return userDocRef;
+
 }
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {

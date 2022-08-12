@@ -1,5 +1,5 @@
-import '../card-list/card-list.styles.scss';
-import Card from '../card/card.component'
+import './card-list.styles.scss';
+import Card from '../landing-card/card.component'
 
 const CardList = ({ categories }) => {
     return (

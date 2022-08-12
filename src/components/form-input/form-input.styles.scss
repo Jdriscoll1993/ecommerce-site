@@ -1,0 +1,57 @@
+$secondary-color: grey;
+$primary-color: black;
+
+//@mixin for reusability in the stylesheet - contains style rules
+// creating shrink and move animation effect on input labels
+@mixin shrinkLabel {
+  color: $primary-color;
+  top: -14px;
+  font-size: 12px;
+}
+
+.group {
+  position: relative;
+  margin: 45px 0;
+
+  .form-input {
+    background: none;
+    background-color: white;
+    color: $secondary-color;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid $secondary-color;
+    margin: 25px 0;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus ~ .form-input-label {
+      @include shrinkLabel();
+    }
+  }
+
+  //easy for user to identify # of entered characters
+  input[type="password"] {
+    letter-spacing: 0.8em;
+  }
+
+  .form-input-label {
+    color: $secondary-color;
+    font-size: 16px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 300ms ease all;
+
+    &.shrink {
+      @include shrinkLabel();
+    }
+  }
+}
