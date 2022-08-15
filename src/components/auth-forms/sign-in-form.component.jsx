@@ -10,6 +10,8 @@ const defaultFormFields = {
     password: ''
 }
 
+//TODO - FORGOT PASSWORD AND EMAIL RESET LINK
+
 const SignInForm = () => {
 
     //set the object to state
@@ -26,15 +28,28 @@ const SignInForm = () => {
         setFormFields(defaultFormFields);
     };
 
-    const handleSubmit = async (event) => { //NEED TO ADD FUNCTIONALITY FOR SIGNING IN
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            const response = await signInAuthUsersWithEmailAndPassword(email,password);
+            const response = await signInAuthUsersWithEmailAndPassword(email, password);
             console.log(response);
             resetFormFields();
         } catch (error) {
-            alert('invalid email or password');
+            switch (error.code) {
+                case 'auth/invalid-email':
+                    alert('Specified email is invalid. Please try again.');
+                    break;
+                case 'auth/user-not-found':
+                    alert('No user assocaited with this email.');
+                    break
+                case 'auth/wrong-password':
+                    alert('Specified password is invalid. Please try again.');
+                    break;
+                default:
+                    console.log(error);
+            }
+            console.log(error);
         }
     };
 
@@ -64,7 +79,7 @@ const SignInForm = () => {
                     value={password} />
                 <div className='buttons'>
                     <Button type='submit'>submit</Button>
-                    <Button buttonType='google' onClick={signInGoogleUser}>Google Sign In</Button>
+                    <Button type='button' buttonType='google' onClick={signInGoogleUser}>Google Sign In</Button>
                 </div>
 
             </form>
