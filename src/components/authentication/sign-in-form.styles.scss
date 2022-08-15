@@ -1,0 +1,16 @@
+.sign-in-container {
+  margin-bottom: 10em;
+  width: 32vh;
+
+  .buttons {
+    flex-direction: column;
+
+    h2{
+        display:flex;
+        justify-content: center;
+        font-size: 1em;
+        font-weight:lighter;
+    }
+    
+  }
+}

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 import '../form-input/form-input.styles.scss';
-import '../sign-up/sign-up-form.styles.scss';
+import './sign-up-form.styles.scss';
 import Button from '../button/button.componenet';
 import '../button/button.styles.scss';
 //initialize object for sign in fields
@@ -19,6 +19,8 @@ const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     //destructure the fields 
     const { displayName, email, password, confirmPassword } = formFields;
+
+
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);

@@ -1,10 +1,12 @@
 import { initializeApp } from 'firebase/app';
 import {
     getAuth,
+    signOut,
     signInWithRedirect,
     signInWithPopup,
     GoogleAuthProvider,
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
 } from 'firebase/auth'
 import {
     getFirestore,
@@ -27,6 +29,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
+export const auth = getAuth();
+console.log(auth);
 //generate a provider 
 const provider = new GoogleAuthProvider();
 
@@ -34,18 +38,38 @@ provider.setCustomParameters({
     prompt: 'select_account'
 });
 
-export const auth = getAuth();
+
 export const db = getFirestore();
 
-//add additional auth providers here
+// SIGN IN USER 
+
+//add additional auth providers as needed
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
+// export const signInDefault = (email, password) =>
+//     signInWithEmailAndPassword(auth, email, password)
+//         .then((userCreds) => {
+//             console.log(auth.email, auth.password);
+//             //signed in 
+//             const user = userCreds.user;
+//         }).catch((error) => {
+//             console.log('Error signing in: ', error.message, error.code)
+//         });
 
+// SIGN OUT USER
+
+signOut(auth).then(() => {
+    //sign-out success
+}).catch((error) => {
+    console.log('Error signing out: ', error.message, error.code);
+})
+
+//CREATE USER
 
 //asynchronously create document references for signing in and signing out users
 export const createUserDocumentFromAuth = async (
     userAuth,
-    additionalInfo = { displayName: 'ferkle' }
+    additionalInfo = { displayName: 'default display name' }
 ) => {
     if (!userAuth) return;
 
@@ -68,6 +92,7 @@ export const createUserDocumentFromAuth = async (
                 createdAt,
                 ...additionalInfo //spreading in extra info at end 
             });
+
         }
         catch (error) {
             console.log('error creating user', error.message);
@@ -82,4 +107,8 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
 
     return await createUserWithEmailAndPassword(auth, email, password);
+}
+
+export const signInDefault = async(email, password) => {
+    return await  signInWithEmailAndPassword (auth, email,password);
 }
