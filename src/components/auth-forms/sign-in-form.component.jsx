@@ -2,9 +2,9 @@
 import { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.componenet';
-import '../auth-forms/sign-up-form.component';
+import { signInWithGooglePopup, createUserDocumentFromAuth, signInAuthUsersWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
+import '../auth-forms/sign-in-form.styles.scss';
 
-import { signInWithGooglePopup, createUserDocumentFromAuth, signInDefault } from '../../utils/firebase/firebase.utils';
 const defaultFormFields = {
     email: '',
     password: ''
@@ -19,26 +19,33 @@ const SignInForm = () => {
 
     const signInGoogleUser = async () => {
         const { user } = await signInWithGooglePopup();
-        const userDocRef = await createUserDocumentFromAuth(user);
-    }
+        await createUserDocumentFromAuth(user);
+    };
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
-    }
+    };
 
     const handleSubmit = async (event) => { //NEED TO ADD FUNCTIONALITY FOR SIGNING IN
         event.preventDefault();
-        resetFormFields();
-    }
+
+        try {
+            const response = await signInAuthUsersWithEmailAndPassword(email,password);
+            console.log(response);
+            resetFormFields();
+        } catch (error) {
+            alert('invalid email or password');
+        }
+    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value })
-    }
+    };
 
     return (
         <div className='sign-in-container'>
-            <h2>Login</h2>
+            <h2>Already have an account?</h2>
             <span>Sign in with your email and password</span>
             <form onSubmit={handleSubmit}>
                 <FormInput
@@ -57,7 +64,6 @@ const SignInForm = () => {
                     value={password} />
                 <div className='buttons'>
                     <Button type='submit'>submit</Button>
-                    <div style={{ padding: '.25em' }}><h2>-or-</h2></div>
                     <Button buttonType='google' onClick={signInGoogleUser}>Google Sign In</Button>
                 </div>
 
