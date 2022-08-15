@@ -15,15 +15,15 @@ const Navigation = () => {
                 </div>
                 <div className='nav-links-container'>
                     <div className='nav-link'>
-                        <Link to='/home'>shop</Link>
+                        <Link to='/shop'>shop</Link>
                     </div>
 
                     <div className='nav-link'>
-                        <Link to='/home'>contact</Link>
+                        <Link to='/'>contact</Link>
                     </div>
 
                     <div className='nav-link'>
-                        <Link to='/sign-in'>sign in</Link>
+                        <Link to='/auth'>sign in</Link>
                     </div>
                 </div>
             </div>

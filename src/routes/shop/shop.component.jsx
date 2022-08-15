@@ -1,6 +1,6 @@
 import CardList from '../../components/landing-card-list/card-list.component'
 
-const Home = () => {
+const Shop = () => {
   const categories = [
     {
       id: '1',
@@ -34,4 +34,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default Shop;

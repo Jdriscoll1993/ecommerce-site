@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.componenet';
-import '../authentication/sign-in-form.styles.scss';
+import '../auth-forms/sign-up-form.component';
 
 import { signInWithGooglePopup, createUserDocumentFromAuth, signInDefault } from '../../utils/firebase/firebase.utils';
 const defaultFormFields = {

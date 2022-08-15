@@ -1,22 +1,25 @@
 
-import SignUpForm from '../../components/authentication/sign-up-form.component';
-import Button from '../../components/button/button.componenet';
+import SignInForm from '../../components/auth-forms/sign-in-form.component';
+import SignUpForm from '../../components/auth-forms/sign-up-form.component';
 import '../../components/button/button.styles.scss';
-import '../login/sign-in.styles.scss';
-import SignInForm from '../../components/authentication/sign-in-form.component';
+import '../authentication/sign-in.styles.scss';
+
 const SignIn = () => {
-
-
-
     return (
         <div className='login-container'>
-
             <SignInForm />
             <SignUpForm />
         </div>
     )
 }
 export default SignIn;
+
+
+
+
+
+
+
 
     // //sign in with google redirect
     // useEffect(() => {
