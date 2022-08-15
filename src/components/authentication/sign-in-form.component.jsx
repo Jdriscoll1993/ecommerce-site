@@ -58,7 +58,7 @@ const SignInForm = () => {
                 <div className='buttons'>
                     <Button type='submit'>submit</Button>
                     <div style={{ padding: '.25em' }}><h2>-or-</h2></div>
-                    <Button buttonType='google' onClick={signInGoogleUser}>Sign in with Google</Button>
+                    <Button buttonType='google' onClick={signInGoogleUser}>Google Sign In</Button>
                 </div>
 
             </form>
