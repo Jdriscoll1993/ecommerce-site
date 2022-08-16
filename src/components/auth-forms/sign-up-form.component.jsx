@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 import '../form-input/form-input.styles.scss';
@@ -6,7 +6,6 @@ import './sign-up-form.styles.scss';
 import Button from '../button/button.componenet';
 import '../button/button.styles.scss';
 
-import { UserContext } from '../../contexts/user.context';
 //initialize object for sign in fields
 const defaultFormFields = {
     displayName: '',
@@ -21,8 +20,6 @@ const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     //destructure the fields 
     const { displayName, email, password, confirmPassword } = formFields;
-
-    const { setCurrentUser } = useContext(UserContext);
 
     //hooking into context causes react to rerun function 
     //not rerender unless jsx changes based on upated values 
@@ -48,8 +45,6 @@ const SignUpForm = () => {
         try {
             const { user } = await createAuthUserWithEmailAndPassword(email, password);
             await createUserDocumentFromAuth(user, { displayName });
-
-            setCurrentUser(user); //when user signed up, user is set inside UserContext
 
             resetFormFields();
         } catch (error) {

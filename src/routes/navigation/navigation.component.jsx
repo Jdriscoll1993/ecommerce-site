@@ -8,12 +8,13 @@ import { signOutUser } from '../../utils/firebase/firebase.utils';
 import '../navigation/navigation.styles.scss';
 
 const Navigation = () => {
-    const { currentUser, setCurrentUser } = useContext(UserContext); //rerenders component when the value of UserContext is updated
+    const { currentUser } = useContext(UserContext); //rerenders component when the value of UserContext is updated
 
-    const signOutHandler = async () => {
-        await signOutUser();
-        setCurrentUser(null);
-    }
+    //Don't need a sign out handler bc auth state change listener will catch whenever a user signs out
+    // const signOutHandler = async () => {
+    //     await signOutUser();
+    //     setCurrentUser(null);
+    // }
 
     return (
         <Fragment>
@@ -32,7 +33,7 @@ const Navigation = () => {
                         <Link to='/'>CONTACT</Link>
                     </div>
                     {
-                        currentUser ? (<span className='nav-link' onClick={signOutHandler}>SIGN OUT</span>)
+                        currentUser ? (<span className='nav-link' onClick={signOutUser}>SIGN OUT</span>)
                             : (<Link to='/auth'>SIGN IN</Link>)
                     }
                 </div>

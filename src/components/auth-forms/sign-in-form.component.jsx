@@ -1,5 +1,5 @@
 
-import { useState, useContext } from 'react';
+import { useState  } from 'react';
 
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.componenet';
@@ -28,11 +28,9 @@ const SignInForm = () => {
     //destructure the fields 
     const { email, password } = formFields;
 
-    const { setCurrentUser } = useContext(UserContext); 
 
     const signInGoogleUser = async () => {
-        const { user } = await signInWithGooglePopup();
-        await createUserDocumentFromAuth(user);
+        await signInWithGooglePopup();
     };
 
     const resetFormFields = () => {
@@ -44,7 +42,6 @@ const SignInForm = () => {
 
         try {
             const { user } = await signInAuthUsersWithEmailAndPassword(email, password);
-            setCurrentUser(user);
             resetFormFields();
         } catch (error) {
             switch (error.code) {
