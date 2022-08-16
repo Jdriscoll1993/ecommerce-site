@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import FormInput from '../form-input/form-input.component';
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 import '../form-input/form-input.styles.scss';
 import './sign-up-form.styles.scss';
 import Button from '../button/button.componenet';
 import '../button/button.styles.scss';
+
+import { UserContext } from '../../contexts/user.context';
 //initialize object for sign in fields
 const defaultFormFields = {
     displayName: '',
@@ -15,12 +17,17 @@ const defaultFormFields = {
 
 const SignUpForm = () => {
 
-    //set the object to state
+    //set the fields object to state
     const [formFields, setFormFields] = useState(defaultFormFields);
     //destructure the fields 
     const { displayName, email, password, confirmPassword } = formFields;
 
+    const { setCurrentUser } = useContext(UserContext);
 
+    //hooking into context causes react to rerun function 
+    //not rerender unless jsx changes based on upated values 
+    //COULD BE A PERFORMANCE PROBLEM WITH MANY COMPONENTS HOOKED INTO A SINGLE CONTEXT
+    // const val = useContext(UserContext); 
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
@@ -41,6 +48,9 @@ const SignUpForm = () => {
         try {
             const { user } = await createAuthUserWithEmailAndPassword(email, password);
             await createUserDocumentFromAuth(user, { displayName });
+
+            setCurrentUser(user); //when user signed up, user is set inside UserContext
+
             resetFormFields();
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {

@@ -1,0 +1,15 @@
+.authentication-container{
+    display:flex;
+    justify-content: space-between;
+    width: 900px;
+    margin: 30px auto; //auto margins on sides - centered regardless of screen size
+    flex-wrap: wrap;
+}
+
+.authentication-container-mobile{
+    display:flex;
+    justify-content: space-between;
+    width: 380px;
+    margin: 30px auto; //auto margins on sides - centered regardless of screen size
+    flex-wrap: wrap;
+}

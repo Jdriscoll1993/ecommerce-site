@@ -46,15 +46,6 @@ export const db = getFirestore();
 //add additional auth providers as needed
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
-// export const signInDefault = (email, password) =>
-//     signInWithEmailAndPassword(auth, email, password)
-//         .then((userCreds) => {
-//             console.log(auth.email, auth.password);
-//             //signed in 
-//             const user = userCreds.user;
-//         }).catch((error) => {
-//             console.log('Error signing in: ', error.message, error.code)
-//         });
 
 // SIGN OUT USER
 
@@ -111,8 +102,8 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
     return await createUserWithEmailAndPassword(auth, email, password);
 }
 
-export const signInAuthUsersWithEmailAndPassword = async(email, password) => {
+export const signInAuthUsersWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
 
-    return await  signInWithEmailAndPassword (auth, email,password);
+    return await signInWithEmailAndPassword(auth, email, password);
 }
