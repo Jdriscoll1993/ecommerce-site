@@ -1,4 +1,4 @@
-import './card.styles.scss';
+import './category-card.styles.scss';
 const Card = ({ category }) => {
     const { imageUrl, title } = category;
     return (

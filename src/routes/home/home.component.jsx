@@ -1,4 +1,4 @@
-import CardList from '../../components/category-card-list/card-list.component'
+import CardList from '../../components/category-card-list/category-card-list.component'
 
 const Home = () => {
   const categories = [
