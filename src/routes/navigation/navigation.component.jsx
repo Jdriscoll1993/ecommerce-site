@@ -3,11 +3,17 @@ import { React, Outlet, Link } from 'react-router-dom';
 import { ReactComponent as NavLogo } from '../../assets/crown.svg';
 
 import { UserContext } from '../../contexts/user.context';
+import { signOutUser } from '../../utils/firebase/firebase.utils';
+
 import '../navigation/navigation.styles.scss';
 
 const Navigation = () => {
-    const {currentUser} = useContext(UserContext); //rerenders component when the value of UserContext is updated
-    console.log(currentUser);
+    const { currentUser, setCurrentUser } = useContext(UserContext); //rerenders component when the value of UserContext is updated
+
+    const signOutHandler = async () => {
+        await signOutUser();
+        setCurrentUser(null);
+    }
 
     return (
         <Fragment>
@@ -26,9 +32,8 @@ const Navigation = () => {
                         <Link to='/'>CONTACT</Link>
                     </div>
                     {
-                        currentUser ? (<span className='nav-link'>SIGN OUT</span>)
+                        currentUser ? (<span className='nav-link' onClick={signOutHandler}>SIGN OUT</span>)
                             : (<Link to='/auth'>SIGN IN</Link>)
-
                     }
                 </div>
             </div>
