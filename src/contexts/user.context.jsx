@@ -10,12 +10,14 @@ export const UserContext = createContext({
 });
 
 //provioder is alias component allowing us to use UserContext.Provider and wrap the children
+//1) SET UP STORAGE
 export const UserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null); //any component listening to currentUser should update
     const value = { currentUser, setCurrentUser };
 
     //refactored - no longer need to hook into UserContext from sign-in and sign-up forms
     //optimized -now whenver context value updates, dont need to rerun form functions needlessly
+//2) SET UP SEPERATE CALL FOR DATA
     useEffect(() => {
         //stop listening when component unmounts
         //onAuthStateChangedListener runs callback whenever auth state changes

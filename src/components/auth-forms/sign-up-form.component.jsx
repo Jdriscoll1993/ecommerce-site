@@ -44,8 +44,7 @@ const SignUpForm = () => {
 
         try {
             const { user } = await createAuthUserWithEmailAndPassword(email, password);
-            await createUserDocumentFromAuth(user, { displayName });
-
+            await createUserDocumentFromAuth(user, { displayName }); //need this display name field so cant leverage listener within user.context
             resetFormFields();
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {

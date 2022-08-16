@@ -30,7 +30,7 @@ const Navigation = () => {
                     </div>
 
                     <div className='nav-link'>
-                        <Link to='/'>CONTACT</Link>
+                        <Link to='/contact'>CONTACT</Link>
                     </div>
                     {
                         currentUser ? (<span className='nav-link' onClick={signOutUser}>SIGN OUT</span>)
