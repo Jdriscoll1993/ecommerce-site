@@ -110,3 +110,12 @@ export const signInAuthUsersWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
+/*
+asnyc stream concept - behind the scenes of observer pattern - onAuthStateChangedListener building out listener model
+{
+    next: callback,
+    error: errorCallback,
+    complete: completedCallback
+}
+*/
