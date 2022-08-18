@@ -4,7 +4,7 @@ import { ReactComponent as CartSvg } from '../../assets/shopping-bag.svg';
 import '../cart-icon/cart-icon.styles.scss';
 
 const CartIcon = () => {
-    const { isCartOpen, setIsCartOpen,cartItems, cartItemCount } = useContext(CartContext);
+    const { isCartOpen, setIsCartOpen, cartItemCount } = useContext(CartContext);
 
     const toggleCartDropdown = () => setIsCartOpen(!isCartOpen);
 
