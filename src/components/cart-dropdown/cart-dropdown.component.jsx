@@ -1,8 +1,7 @@
 import Button from '../button/button.componenet';
 import CartItem from '../cart-item/cart-item.component';
-import Checkout from '../../routes/checkout/checkout.component';
-import { useContext} from 'react'
-import { useNavigate} from 'react-router-dom';
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../contexts/cart.context';
 
 import './cart-dropdown.styles.scss';
