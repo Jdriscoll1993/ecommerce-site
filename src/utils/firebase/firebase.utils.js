@@ -15,7 +15,9 @@ import {
     getDoc,
     setDoc,
     collection,
-    writeBatch
+    writeBatch,
+    query,
+    getDocs
 } from 'firebase/firestore'
 
 //config for CRUD actions to instance of firebase
@@ -34,6 +36,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 export const auth = getAuth();
 console.log(auth);
+
 //generate a provider 
 const provider = new GoogleAuthProvider();
 
@@ -54,25 +57,36 @@ export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
     });
     await batch.commit();
     console.log('finished');
-
 };
+//get a data map of the product categories 
+export const getCategoriesAndDocuments = async () => {
+    const collectionRef = collection(db, 'categories');
+    const q = query(collectionRef);
+
+    const querySnapshot = await getDocs(q);
+    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+        const { title, items } = docSnapshot.data();
+        acc[title.toLowerCase()] = items;
+        return acc;
+    }, {});
+
+    return categoryMap;
+}
 
 // SIGN IN USER 
-
 //add additional auth providers as needed
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 
 // SIGN OUT USER
-
 signOut(auth).then(() => {
     //sign-out success
 }).catch((error) => {
     console.log('Error signing out: ', error.message, error.code);
 })
 
-//CREATE USER
 
+//CREATE USER
 //asynchronously create document references for signing in and signing out users
 export const createUserDocumentFromAuth = async (
     userAuth,
@@ -108,24 +122,19 @@ export const createUserDocumentFromAuth = async (
 
 }
 
-//helper functions 
-
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
-
     return await createUserWithEmailAndPassword(auth, email, password);
 }
 
 export const signInAuthUsersWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
-
     return await signInWithEmailAndPassword(auth, email, password);
 }
 
 export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
-
 /*
 asnyc stream concept - behind the scenes of observer pattern - onAuthStateChangedListener building out listener model
 {
