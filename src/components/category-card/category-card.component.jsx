@@ -1,6 +1,6 @@
 import './category-card.styles.scss';
 import { useNavigate } from 'react-router-dom';
-const Card = ({ category }) => {
+const CategoryCard = ({ category }) => {
 
     const navigate = useNavigate();
 
@@ -18,4 +18,4 @@ const Card = ({ category }) => {
             </div>
         </div>)
 }
-export default Card;
+export default CategoryCard;

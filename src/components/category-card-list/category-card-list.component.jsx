@@ -1,7 +1,7 @@
 import './category-card-list.styles.scss';
 import Card from '../category-card/category-card.component'
 
-const CardList = ({ categories }) => {
+const CategoryCardList = ({ categories }) => {
     return (
         <div className='categories-container'>
             {categories.map((category) => (
@@ -10,4 +10,4 @@ const CardList = ({ categories }) => {
         </div>)
 }
 
-export default CardList
+export default CategoryCardList
