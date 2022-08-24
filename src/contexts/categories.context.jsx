@@ -1,8 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
-import { addCollectionAndDocument, getCategoriesAndDocuments } from '../utils/firebase/firebase.utils.js';
-
-
-import SHOP_DATA from '../shop-data.js'
+import { getCategoriesAndDocuments } from '../utils/firebase/firebase.utils.js';
+import SHOP_DATA from '../shop-data.js' // 1 time use - initial data used to create categories collection/document in firestore db
 
 export const CategoriesContext = createContext({
     getCategoriesMap: {},
@@ -25,18 +23,6 @@ export const CategoriesProvider = ({ children }) => {
 
     return <CategoriesContext.Provider value={value}>{children}</CategoriesContext.Provider>
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 // ***RUNNING AGAIN WILL ATTEMPT TO SET VALUES IN DB*** Ran once to set values in db.
 // useEffect(() => {
