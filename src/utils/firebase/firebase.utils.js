@@ -8,7 +8,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     onAuthStateChanged
-} from 'firebase/auth'
+} from 'firebase/auth';
 import {
     getFirestore,
     doc,
@@ -18,7 +18,10 @@ import {
     writeBatch,
     query,
     getDocs
-} from 'firebase/firestore'
+} from 'firebase/firestore';
+
+
+// ----Firebase Init----
 
 //config for CRUD actions to instance of firebase
 const firebaseConfig = {
@@ -31,22 +34,19 @@ const firebaseConfig = {
     measurementId: "G-GH6BGWYZ5F"
 };
 
-// Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 export const auth = getAuth();
-console.log(auth);
-
-//generate a provider 
-const provider = new GoogleAuthProvider();
-
-provider.setCustomParameters({
-    prompt: 'select_account'
-});
-
 
 export const db = getFirestore();
 
+const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: 'select_account' });
+
+
+// ----NoSQL DB Methods----
+
+//write a new collection and document to the firestore db
 export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
     const collectionRef = collection(db, collectionKey);
     const batch = writeBatch(db);
@@ -58,6 +58,7 @@ export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
     await batch.commit();
     console.log('finished');
 };
+
 //get a data map of the product categories 
 export const getCategoriesAndDocuments = async () => {
     const collectionRef = collection(db, 'categories');
@@ -73,6 +74,9 @@ export const getCategoriesAndDocuments = async () => {
     return categoryMap;
 }
 
+
+// ----User Auth----
+
 // SIGN IN USER 
 //add additional auth providers as needed
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
@@ -84,7 +88,6 @@ signOut(auth).then(() => {
 }).catch((error) => {
     console.log('Error signing out: ', error.message, error.code);
 })
-
 
 //CREATE USER
 //asynchronously create document references for signing in and signing out users
