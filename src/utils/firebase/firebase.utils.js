@@ -120,7 +120,6 @@ export const createUserDocumentFromAuth = async (
             console.log('error creating user', error.message);
         }
     }
-
     return userDocRef;
 
 }
@@ -128,6 +127,7 @@ export const createUserDocumentFromAuth = async (
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
     return await createUserWithEmailAndPassword(auth, email, password);
+
 }
 
 export const signInAuthUsersWithEmailAndPassword = async (email, password) => {
@@ -138,6 +138,8 @@ export const signInAuthUsersWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
+
 /*
 asnyc stream concept - behind the scenes of observer pattern - onAuthStateChangedListener building out listener model
 {

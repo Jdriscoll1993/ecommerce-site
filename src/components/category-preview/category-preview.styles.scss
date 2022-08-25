@@ -6,13 +6,11 @@
   .title {
     font-size: 28px;
     margin-bottom: 25px;
-
-    h1:hover {
-      color: gray;
-      cursor: pointer;
-    }
   }
-
+  .title:hover {
+    color: gray;
+    cursor: pointer;
+  }
   .preview {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
