@@ -1,0 +1,6 @@
+.clothing-category-container {
+  display: grid;
+  grid-template-columns: repeat(4, 2fr);
+  column-gap: 20px;
+  row-gap: 50px;
+}
