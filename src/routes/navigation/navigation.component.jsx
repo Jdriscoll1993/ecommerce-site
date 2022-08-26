@@ -30,8 +30,8 @@ const Navigation = () => {
                 <NavLinks>
                     <NavLink to='/shop'>SHOP</NavLink>
                     {
-                        currentUser ? (<span className='nav-link' onClick={signOutUser}>SIGN OUT</span>)
-                            : (<Link to='/auth'>SIGN IN</Link>)
+                        currentUser ? (<NavLink as='span' onClick={signOutUser}>SIGN OUT</NavLink>)
+                            : (<NavLink to='/auth'>SIGN IN</NavLink>)
                     }
                     <CartIcon onClick={'TOGGLE CART DROP DOWN HERE'} />
                 </NavLinks>
