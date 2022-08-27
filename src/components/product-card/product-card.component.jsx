@@ -1,4 +1,4 @@
-import Button from "../button/button.componenet";
+import Button from '../button/button.component';
 import {useContext} from 'react';
 import { CartContext } from "../../contexts/cart.context";
 import './product-card.styles.scss';
